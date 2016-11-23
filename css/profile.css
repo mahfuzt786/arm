@@ -1,0 +1,18 @@
+.dash-user-info{
+    height: 88vh;
+    display: block;
+}
+.navbar-inverse{
+    background: #2C3E50;
+    border-bottom: 1px solid yellow;
+}
+body{
+    background-color: #85929E;
+}
+.dash-item{
+    text-align: center;
+}
+.dashboard{
+    margin: 10px;
+    margin-top: 68px;
+}

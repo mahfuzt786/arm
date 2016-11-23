@@ -1,0 +1,62 @@
+/* 
+    Document   : Login
+    Created on : Aug 19, 2016, 09:05:00 PM
+    Author     : WalknetFunctions
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Login Menu style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+html, body { 
+    margin: 0;
+    padding: 0;
+    background-color: #2C3E50;
+}
+.body_container{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100%;
+    height: auto;
+    position: absolute;
+}
+.login_box{
+    border: 1px solid;
+    margin: auto;
+    position: fixed;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #34495E;
+    box-shadow: 0 5px 8px rgba(0,0,0,0.48);
+}
+.foot{
+    border-radius: 0 0 5px 5px;
+    border: none;
+    border-top: 1px solid;
+}
+.panel-heading{
+    background: grey;
+}
+.btn-default{
+    background: #2C3E50;
+    color: white;
+}
+.btn-default:hover{
+    background:#85929E;
+    color: white;
+}
+.footer p{
+    margin: 5px;
+    text-align: center;
+    font-size: 10px;
+}
+.full_width{
+    width:100%; display: block;
+}
