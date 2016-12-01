@@ -11,9 +11,10 @@
             <div class="login_box panel panel-default col-md-4" style="margin: 0; padding: 0;">
                 <div class="panel-body">
                     <form action="" id="frm-login">
-                        <div class="form-group input-group col-lg-12 full_width text-center">
-                            <i class="fa fa-4x fa-user-secret"></i>
-                            <p><b>A D M I N I S T R A T O R</b></p>        
+                        <div class="form-group input-group col-lg-12 full_width text-center" style="padding: 10px;">
+                            <img src="icon/phoenix_ac.png"/>
+                            <!--<i class="fa fa-4x fa-user-secret"></i>
+                            <p><b>P H O E N I X</b></p>-->     
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

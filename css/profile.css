@@ -12,7 +12,23 @@ body{
 .dash-item{
     text-align: center;
 }
+.items{
+    margin: 0px;
+    padding: 5px;
+}
+.items-menu{
+   height: 111px;
+}
+.menu-item{
+    padding: 5px;
+}
+.dash-sub{
+    background-color: lightsteelblue;
+}
 .dashboard{
     margin: 10px;
-    margin-top: 68px;
+    margin-top: 55px;
+}
+.profile-pic{
+    max-width:100px; max-height: 100px; height: auto; width: auto;    
 }
