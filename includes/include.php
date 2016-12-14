@@ -24,4 +24,8 @@
 <script src="js/main.js"></script>
 <script src="js/list.pagination.min.js"></script>
 <script src="js/navbar.js"></script>
-<?php include 'includes/database-config.php'; ?>
+<?php
+//include 'includes/database-config.php';
+include 'includes/config.php';
+include_once 'includes/modulefunction.php';
+?>

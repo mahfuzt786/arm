@@ -1,4 +1,11 @@
 $(document).ready(function(){
+    $('#btn-course').click(function(){
+        location.replace('course-add.php');
+    });
+    
+    
+    
+    
     $("input#event-date").datepicker({
         dateFormat:'yy-mm-dd',
         changeMonth: true,

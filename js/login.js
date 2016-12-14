@@ -1,3 +1,5 @@
+/* global Lobibox */
+
 $(document).ready(function(){
     $('#username').focus();
     $('#username').on('keypress',function(e) {
@@ -49,9 +51,9 @@ $(document).ready(function(){
     
     function login()
     {
+                        
         if($('#username').val() && $('#password').val())
-        {
-            $.ajax({
+        {   $.ajax({
                 url: "includes/login-check.php",
                 type: "POST",
                 data: {
@@ -59,15 +61,17 @@ $(document).ready(function(){
                     email: $('input#username').val(),
                     password: $('input#password').val()
                 },
-                //dataType: "json",
+               // dataType: "json",
                 success: function(result){
-                    if(result=='done') {
+                    
+                    if(result == 1) {
                         location.replace('home.php');
                     }
                     else {
+                        
                         Lobibox.alert("warning",
                         {
-                            msg: result
+                            msg: "Error in Logging In !! Invalid Username or Password ."
                         });
                         
                         if($('.lobibox'))
@@ -78,6 +82,7 @@ $(document).ready(function(){
                     }
                 },
                 error: function (a,b,c) {
+                    alert("error");
                     Lobibox.alert("error",
                     {
                         msg: 'error in logging in'

@@ -6,7 +6,7 @@ $(document).ready(function() {
     {
         homeHigh();
     }
-    if (pathname.toLowerCase().indexOf("course") >= 0)
+    if (pathname.toLowerCase().indexOf("course") >= 0 || pathname.toLowerCase().indexOf("course-add") >= 0)
     {
         courseHigh();
     }
@@ -31,6 +31,9 @@ $(document).ready(function() {
         $('#menu ul li.listCourse').addClass('active');
         $('#menu ul li.listSubject').removeClass('active');
         $('#menu ul li.listSetting').removeClass('active');
+        
+        $('#sidemenu div div.menuCourse').addClass('menu-selected');
+        $('#sidemenu div div.menuSubject').removeClass('menu-selected');
     }
     function subjectHigh()
     {
@@ -38,6 +41,9 @@ $(document).ready(function() {
         $('#menu ul li.listCourse').removeClass('active');
         $('#menu ul li.listSubject').addClass('active');
         $('#menu ul li.listSetting').removeClass('active');
+        
+        $('#sidemenu div div.menuCourse').removeClass('menu-selected');
+        $('#sidemenu div div.menuSubject').addClass('menu-selected');
     }
     function settingHigh()
     {

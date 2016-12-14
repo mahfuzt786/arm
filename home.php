@@ -4,7 +4,7 @@ include 'includes/checkInvalidUser.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <title >Administrator : Home</title>
+        <title >Phoenix : Dashboard</title>
         <?php require_once 'includes/include.php'; ?>
         <link href="css/profile.css" rel="stylesheet"/>
     </head>
@@ -12,9 +12,15 @@ include 'includes/checkInvalidUser.php';
 
         <?php require_once('includes/navbar.php'); 
         $userid = $_SESSION[SESS_LOGIN_ID];
-        $sql_user_info = "select u.*,r.* from wtfindin_arm.user u inner join wtfindin_arm.role r on u.roleid=r.roleid AND u.userId = '$userid'";
-        $result_user_info = $mysqli->query($sql_user_info);
-        $rows = $result_user_info->fetch_assoc();
+        
+        $sql_user_info = "select u.*,r.* from wtfindin_arm.user u inner join wtfindin_arm.role r on u.roleid=r.roleid AND u.userId = :userid";
+        $stmt=$DB->prepare($sql_user_info);
+        $stmt->bindValue(":userid", $userid);
+        $stmt->execute();
+        $rows=$stmt->fetch();
+        
+        //$result_user_info = $mysqli->query($sql_user_info);
+        //$rows = $result_user_info->fetch_assoc();
         ?>
         <div class="col-lg-12 container-fluid">
             <div class="row-fluid dashboard">

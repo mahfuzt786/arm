@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Administrator</title>
+        <title>Phoenix : Login</title>
         <?php include_once 'includes/include.php'; ?>
         <link href="css/login.css" rel="stylesheet">
         <script src="js/login.js"></script>

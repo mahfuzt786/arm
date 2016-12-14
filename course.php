@@ -5,8 +5,8 @@ include 'includes/checkInvalidUser.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <title >Administrator : Home</title>
-        <?php require_once 'includes/include.php'; ?>
+        <title >Phoenix : Course</title>
+        <?php require_once 'includes/include.php';?>
         <link href="css/profile.css" rel="stylesheet"/>
         <link href="css/course.css" rel="stylesheet"/>
         <script src="js/course.js"></script>
@@ -22,8 +22,7 @@ include 'includes/checkInvalidUser.php';
                             right: 2
                         })
                     ]
-                };
-
+                }; 
                 new List('course', options);
                 $('[data-toggle="tooltip"]').tooltip({
                     container: 'body'
@@ -33,11 +32,11 @@ include 'includes/checkInvalidUser.php';
     </head>
     <body>
 
-        <?php require_once('includes/navbar.php'); ?>
+<?php require_once('includes/navbar.php'); ?>
         <div class="col-lg-12 container-fluid">
             <div class="row-fluid dashboard">
                 <div class="col-md-4  items">
-                    <?php include 'includes/menu.php'; ?>
+<?php include 'includes/menu.php'; ?>
                 </div>
 
 
@@ -77,17 +76,23 @@ include 'includes/checkInvalidUser.php';
 
                                     <tbody class="list">
                                         <?php
-                                        $mysqli->set_charset("utf8");
+                                        //$mysqli->set_charset("utf8");
                                         $sql_course = "SELECT wtfindin_arm.course.*
                                                           FROM course
                                                           ORDER BY courseId DESC";
-                                        $result_course = $mysqli->query($sql_course);
-                                        while ($rows_course = $result_course->fetch_assoc()) {
+                                        $result_course = $DB->prepare($sql_course);
+                                        $result_course->execute();
+                                        while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC) )  {
                                             //$rows['courseId'];
                                             echo "<tr>";
                                             echo"<td class='name'>" . $rows_course['courseName'] . "</td>";
-                                            echo"<td class='category'>" . $rows_course['courseCategory'] . "</td>";
-                                            echo"<td class='fees text-center'>" . $rows_course['fees'] . "</td>";
+                                            if($rows_course['courseCategory']=='c'){
+                                                $category='Coaching';
+                                            }else{
+                                                $category='Tuition';
+                                            }
+                                            echo"<td class='category'>" . $category . "</td>";
+                                            echo"<td class='fees text-center'>" . $rows_course['fees'] . " ₹</td>";
                                             echo"<td class='duration text-center'>" . $rows_course['courseDuration'] . "</td>";
                                             echo"<td class='text-center'>
                                                         <button id=\"btn-edit-event\"  onclick=\"edit_event('" . $rows_course['courseId'] . "')\"><i style='color:darkgreen;' data-toggle='tooltip' data-placement='auto' title='Edit' class='fa fa-wrench'></i></button>
