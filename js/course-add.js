@@ -72,6 +72,8 @@ $(document).ready(function () {
                         msg: 'Please enter course duration !!'
                     });
         } else {
+            var cat = $('input:radio[name=course_category]:checked').val();
+            var name = $('#course_name').val();
             $.ajax({
                 url: "includes/course_add.php",
                 type: "POST",
@@ -87,9 +89,19 @@ $(document).ready(function () {
                     if (result == 0) {
                         Lobibox.alert("success",
                                 {
-                                    msg: 'Course Name "' + $('#course_name').val().toUpperCase() + '" successfully added'
+                                    msg: 'Course Name "' + $('#course_name').val().toUpperCase() + '" successfully added . Please add Subjects.',
+                                    callback: function ($this, type, ev) {
+                                        if (type == 'ok') {
+                                            //alert(type);
+                                            location.replace('subject.php?c=' + cat + '&n=' + name);
+                                        }
+                                    }
                                 });
-                        clear();
+                    } else {
+                        Lobibox.alert("error",
+                                {
+                                    msg: result
+                                });
                     }
                 }
             });

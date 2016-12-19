@@ -3,3 +3,7 @@ html, body{
     padding: 0;
     color: #2C3E50;
 }
+.menu-content{
+    height: 88vh;
+    display: block;
+}

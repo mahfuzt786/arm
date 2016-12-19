@@ -6,7 +6,7 @@ include 'includes/checkInvalidUser.php';
 <html>
     <head>
         <title >Phoenix : Course</title>
-        <?php require_once 'includes/include.php';?>
+        <?php require_once 'includes/include.php'; ?>
         <link href="css/profile.css" rel="stylesheet"/>
         <link href="css/course.css" rel="stylesheet"/>
         <script src="js/course.js"></script>
@@ -14,7 +14,7 @@ include 'includes/checkInvalidUser.php';
             $(document).ready(function () {
                 var options = {
                     valueNames: ['name', 'category', 'fees', 'duration', 'options'],
-                    page: 10,
+                    page: 9,
                     plugins: [
                         ListPagination({
                             innerWindow: 3,
@@ -22,7 +22,7 @@ include 'includes/checkInvalidUser.php';
                             right: 2
                         })
                     ]
-                }; 
+                };
                 new List('course', options);
                 $('[data-toggle="tooltip"]').tooltip({
                     container: 'body'
@@ -32,11 +32,11 @@ include 'includes/checkInvalidUser.php';
     </head>
     <body>
 
-<?php require_once('includes/navbar.php'); ?>
+        <?php require_once('includes/navbar.php'); ?>
         <div class="col-lg-12 container-fluid">
             <div class="row-fluid dashboard">
                 <div class="col-md-4  items">
-<?php include 'includes/menu.php'; ?>
+                    <?php include 'includes/menu.php'; ?>
                 </div>
 
 
@@ -82,14 +82,14 @@ include 'includes/checkInvalidUser.php';
                                                           ORDER BY courseId DESC";
                                         $result_course = $DB->prepare($sql_course);
                                         $result_course->execute();
-                                        while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC) )  {
+                                        while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC)) {
                                             //$rows['courseId'];
                                             echo "<tr>";
                                             echo"<td class='name'>" . $rows_course['courseName'] . "</td>";
-                                            if($rows_course['courseCategory']=='c'){
-                                                $category='Coaching';
-                                            }else{
-                                                $category='Tuition';
+                                            if ($rows_course['courseCategory'] == 'c') {
+                                                $category = 'Coaching';
+                                            } else {
+                                                $category = 'Tuition';
                                             }
                                             echo"<td class='category'>" . $category . "</td>";
                                             echo"<td class='fees text-center'>" . $rows_course['fees'] . " ₹</td>";
@@ -104,7 +104,7 @@ include 'includes/checkInvalidUser.php';
                                         ?>
                                     </tbody>
                                 </table>
-                                <div class="text-right">
+                                <div class="text-right" style="font-size: 8px;" >
                                     <div id="course-details" class="pagination"></div>
                                 </div> 
                             </div>

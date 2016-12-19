@@ -7,12 +7,13 @@
         <script src="js/login.js"></script>
     </head>
     <body>
+        <div class="se-pre-con"></div>
         <div class="body_container">
             <div class="login_box panel panel-default col-md-4" style="margin: 0; padding: 0;">
                 <div class="panel-body">
                     <form action="" id="frm-login">
                         <div class="form-group input-group col-lg-12 full_width text-center" style="padding: 10px;">
-                            <img src="icon/phoenix_ac.png"/>
+                            <img src="icon/phoenix-login.png"/>
                             <!--<i class="fa fa-4x fa-user-secret"></i>
                             <p><b>P H O E N I X</b></p>-->     
                         </div>

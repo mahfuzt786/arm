@@ -5,16 +5,20 @@ include 'includes/checkInvalidUser.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <title >Administrator : Home</title>
-        <?php require_once 'includes/include.php'; ?>
+        <title >Phoenix : Subject</title>
+        <?php
+        require_once 'includes/include.php';
+        $cat = $_GET['n'];
+        ?>
         <link href="css/profile.css" rel="stylesheet"/>
-        <link href="css/course.css" rel="stylesheet"/>
-        <script src="js/course.js"></script>
+        <link href="css/subject.css" rel="stylesheet"/>
+        <link href="css/course-add.css" rel="stylesheet"/>
+        <script src="js/subject.js"></script>
         <script>
             $(document).ready(function () {
                 var options = {
                     valueNames: ['name', 'category', 'fees', 'duration', 'options'],
-                    page: 10,
+                    page: 3,
                     plugins: [
                         ListPagination({
                             innerWindow: 3,
@@ -24,7 +28,7 @@ include 'includes/checkInvalidUser.php';
                     ]
                 };
 
-                new List('course', options);
+                new List('subject', options);
                 $('[data-toggle="tooltip"]').tooltip({
                     container: 'body'
                 });
@@ -33,36 +37,90 @@ include 'includes/checkInvalidUser.php';
     </head>
     <body>
 
-        <?php require_once('includes/navbar.php'); ?>
+<?php require_once('includes/navbar.php'); ?>
         <div class="col-lg-12 container-fluid">
             <div class="row-fluid dashboard">
                 <div class="col-md-4  items">
-                    <?php include 'includes/menu.php'; ?>
+<?php include 'includes/menu.php'; ?>
                 </div>
 
 
                 <div class="col-md-8  items">
 
-                    <div class="panel panel-default course-content">
+                    <div class="panel panel-default subject-content">
                         <div class="panel-heading">
-                            <i class="fa fa-graduation-cap"></i> Course
+                            <i class="fa fa-book"></i> Subject
                             <a href="home.php" style="float: right;"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                         <div class="panel-body">
-                            <div id="course">
-                                <div class="col-md-12"  style="padding: 0px;">
-                                    <div class="col-md-2" style="padding-left: 0px;">
-                                        <div class="form-group input-group full_width col-md-12">
-                                            <button type="button" class="btn btn-block btn-primary" name="btn-course" id="btn-course">
-                                                <span class="fa fa-plus"></span> Add</button> 
+
+
+                            <div class="col-md-12">
+                                <form id="subject-form">
+                                    <div class="inputRow">
+                                        <div class="f-h col-md-3">Course Name : <b class="r">*</b></div>
+                                        <div class="col-md-9"style="padding-bottom: 10px;">
+                                            <select class="form-control" name="course_name" id="course_name"> 
+                                                <option value="select">Select Course Name</option>
+                                                <?php
+                                                $selected = '';
+                                                $sql = "SELECT courseId,courseName FROM wtfindin_arm.course ORDER BY courseId DESC";
+                                                $stmt = $DB->prepare($sql);
+                                                $stmt->execute();
+                                                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                                foreach ($results as $rows) {
+                                                    if ($cat == $rows['courseName']) {
+                                                        echo '<option selected="selected" value="' . $rows['courseId'] . ' selected = "' . $selected . '"">' . $rows['courseName'] . '</option>';
+                                                    } else {
+                                                        echo '<option value="' . $rows['courseId'] . '">' . $rows['courseName'] . '</option>';
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-10" style="padding: 0px;">
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                            <input class="form-control search" placeholder="Search"/>
+
+                                    <div class="inputRow">
+                                        <div class="f-h col-md-3">Subject Name : <b class="r">*</b></div>
+
+                                        <div class="col-md-9">
+                                            <input class="form-control" type="text" id="subject_name" placeholder="Subject Name" name='Subject Name' value=""/> 
                                         </div>
-                                    </div>          
+                                    </div>
+
+                                    <div style="display: <?php
+                                         if ($cat == 'c' || $cat == null) {
+                                             echo 'none';
+                                         }
+                                         ?>" id="fee-structure">
+                                        <div class="inputRow">
+                                            <div class="f-h col-md-3">Fees : <b class="r">*</b></div>
+                                            <div class="col-md-9">
+                                                <input class="form-control" style="width: 200px;" maxlength="6" type="text" id="subject_fee" name='subject_fee' placeholder="Rupees" value=""/>          
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="inputRow">
+                                        <div class="f-h col-md-3"></div>
+                                        <div style="padding-top: 10px;" class="inputRow col-lg-9">
+                                            <button style="width: 100px;" type="button" class="btn btn-primary" name="btn-course-add" id="btn-course-add">
+                                                <span class="fa fa-plus"></span> Add</button> 
+
+                                            <button style="width: 100px;" type="button" class="btn btn-primary" name="btn-course-clear" id="btn-course-clear">
+                                                <span class="fa fa-refresh"></span> Clear</button> 
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="subject" class="subject_form col-lg-12">
+                                <div class="col-md-12"  style="padding: 0px;">
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                        <input class="form-control search" placeholder="Search"/>
+                                    </div>         
                                 </div>
                                 <table class="col-lg-12 table table-striped">  
                                     <thead class="thead-default">  
@@ -83,7 +141,7 @@ include 'includes/checkInvalidUser.php';
                                                           ORDER BY courseId DESC";
                                         $result_course = $DB->prepare($sql_course);
                                         $result_course->execute();
-                                        while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC) ) {
+                                        while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC)) {
                                             //$rows['courseId'];
                                             echo "<tr>";
                                             echo"<td class='name'>" . $rows_course['courseName'] . "</td>";
@@ -100,8 +158,8 @@ include 'includes/checkInvalidUser.php';
                                         ?>
                                     </tbody>
                                 </table>
-                                <div class="text-right">
-                                    <div id="course-details" class="pagination"></div>
+                                <div class="text-right" style="font-size: 8px;">
+                                    <div class="pagination"></div>
                                 </div> 
                             </div>
                         </div>

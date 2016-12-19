@@ -1,0 +1,23 @@
+.subject-content{
+    height: 88vh;
+    display: block;
+}
+.footer-account{
+    height: 50px;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    background-color: #2C3E50;
+    border-top: 1px solid yellow;
+    padding-top: 15px;
+}
+.head_content, .head_content_search{
+    margin: 0;
+    padding: 0;
+}
+.subject_form{
+    border: 1px dotted;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

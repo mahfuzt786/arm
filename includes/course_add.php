@@ -42,7 +42,7 @@ function courseAdd($DB) {
     $courseduration = getRequestPostDefault('courseduration', 'null');
 
     if ($coursefee == '' && $courseduration == '') {
-        $coursefee = '$$$';
+        $coursefee = '-';
         $courseduration = 1;
     }
     try {
