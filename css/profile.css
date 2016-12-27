@@ -1,6 +1,7 @@
 .dash-user-info{
     height: 88vh;
     display: block;
+    overflow-y: auto;
 }
 .navbar-inverse{
     background: #2C3E50;
@@ -16,8 +17,11 @@ body{
     margin: 0px;
     padding: 5px;
 }
+.overflow-control{
+    overflow-y: auto;
+}
 .items-menu{
-   height: 111px;
+    height: 111px;
 }
 .menu-item{
     padding: 5px;

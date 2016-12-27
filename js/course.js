@@ -4,8 +4,6 @@ $(document).ready(function(){
     });
     
     
-    
-    
     $("input#event-date").datepicker({
         dateFormat:'yy-mm-dd',
         changeMonth: true,

@@ -10,7 +10,7 @@
 <link href="css/lobibox.css" rel="stylesheet">
 <link rel="stylesheet" href="lib/font-awesome-4.6.3/css/font-awesome.css" />
 <link rel="stylesheet" href="lib/font-awesome-4.6.3/css/font-awesome.min.css" />
-<link href="css/main.css" rel="stylesheet">
+<link href="css/main.css?v=6" rel="stylesheet">
 <link href="css/jquery-ui.css" rel="stylesheet">
 <link href="css/jquery-ui.min.css" rel="stylesheet">
 <link href="css/list.css" rel="stylesheet">
@@ -31,5 +31,6 @@
 <?php
 //include 'includes/database-config.php';
 include 'includes/config.php';
-include_once 'includes/modulefunction.php';
+
+
 ?>

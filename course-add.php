@@ -10,7 +10,7 @@ include 'includes/checkInvalidUser.php';
         <link href="css/profile.css" rel="stylesheet"/>
         <link href="css/course.css" rel="stylesheet"/>
         <link href="css/course-add.css" rel="stylesheet"/>
-        <script src="js/course-add.js"></script>
+        <script src="js/course-add.js?v=4"></script>
         <script>
             $(document).ready(function () {
                 var options = {

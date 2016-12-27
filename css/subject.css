@@ -21,3 +21,15 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.edit-icon, .add-icon{
+    padding-right: 10px;
+}
+.edit-icon, .add-icon, .remove-textbox, .update-icon, .delete-icon{
+    cursor: pointer;
+}
+.subjectNameTextbox, .control2, .control3{
+    display: none;
+}
+.gap{
+    padding-top : 8px;
+}

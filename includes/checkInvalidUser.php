@@ -4,7 +4,9 @@ session_start();
 $flag = 0;
 require_once 'includes/constants.php';
 require_once 'includes/util.php';
-if (!isset($_SESSION[SESS_LOGIN_ID])) {
+$PAGE = basename($_SERVER['PHP_SELF']);
+if (!isset($_SESSION[SESS_LOGIN_ID]) || !in_array("$PAGE", $_SESSION['pages'])) {
+    session_destroy();
     header('Location: index.php');
 } else if (!isset($_SESSION['isLoggedIn']) || !($_SESSION['isLoggedIn'])) {
     //code for authentication comes here

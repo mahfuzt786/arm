@@ -1,5 +1,3 @@
-<?php 
-include_once 'includes/moduleaccess.php';?>
 <div class="se-pre-con"></div>
 <nav class="navbar navbar-inverse navbar-fixed-top" id="menu">
     <div class="container-fluid">
