@@ -17,8 +17,10 @@ include 'includes/checkInvalidUser.php';
         <script src="js/subject.js?v=11"></script>
         <script>
             $(document).ready(function () {
+                var fields_tuition = ['cname', 'sname', 'fees', 'options']; 
+                var fields_coaching = ['cname', 'sname', 'options'];
                 var options = {
-                    valueNames: ['name', 'category', 'fees', 'duration', 'options'],
+                    valueNames: fields_tuition,
                     page: 3,
                     plugins: [
                         ListPagination({
@@ -50,7 +52,7 @@ include 'includes/checkInvalidUser.php';
 
                     <div class="panel panel-default subject-content">
                         <div class="panel-heading">
-                            <i class="fa fa-book"></i> Add Subject :: [<b style="color: darkmagenta;"> Course Name - <?php echo $name; ?> </b>]
+                            <i class="fa fa-book"></i> Add Subject 
                             <a href="home.php" style="float: right;"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                         <div class="panel-body">
@@ -61,9 +63,17 @@ include 'includes/checkInvalidUser.php';
                                     <div class="inputRow">
                                         <div class="f-h col-md-3 course">Course Name : <b class="r">*</b></div>
                                         <div class="col-md-9" style="padding-bottom: 10px;">
-                                            <select class="form-control course" name="course_name" id="course_name"> 
-                                                <option value="select">Select Course Name</option>
-                                                <?php
+
+                                            <?php
+                                            if ((isset($_GET['c']) && isset($_GET['n'])) || (!empty($_GET['c']) && !empty($_GET['n']))) {
+                                                echo "<label style='font-weight : bold; padding : 3px;'>";
+                                                echo strtoupper($name);
+                                                echo "</label>";
+                                            } else {
+
+                                                echo "<select class=\"form-control course\" name=\"course_name\" id=\"course_name\">";
+                                                echo "<option value=\"select\">Select Course Name</option>";
+
                                                 $sql = "SELECT courseId,courseName FROM wtfindin_arm.course ORDER BY courseId DESC";
                                                 $stmt = $DB->prepare($sql);
                                                 $stmt->execute();
@@ -75,8 +85,9 @@ include 'includes/checkInvalidUser.php';
                                                         echo '<option value="' . $rows['courseId'] . '">' . $rows['courseName'] . '</option>';
                                                     }
                                                 }
-                                                ?>
-                                            </select>
+                                                echo "</select>";
+                                            }
+                                            ?>
                                         </div>
                                     </div>
 
@@ -169,10 +180,9 @@ include 'includes/checkInvalidUser.php';
                                 <table class="col-lg-12 table table-striped">  
                                     <thead class="thead-default">  
                                         <tr>
-                                            <th class="sort text-center" data-sort="name" data-toggle="tooltip" data-placement="auto" title="Click to sort by Course Name">Course Name</th>
-                                            <th class="sort text-center" data-sort="category" data-toggle="tooltip" data-placement="auto" title="Click to sort by Course Category">Category</th>
+                                            <th class="sort text-center" data-sort="cname" data-toggle="tooltip" data-placement="auto" title="Click to sort by Course Name">Course Name</th>
+                                            <th class="sort text-center" data-sort="sname" data-toggle="tooltip" data-placement="auto" title="Click to sort by Subject Name">Subject Name</th>
                                             <th class="sort text-center" data-sort="fees" width="15%" data-toggle="tooltip" data-placement="auto" title="Click to sort by Course Fee">Fees</th>
-                                            <th class="sort text-center" data-sort="duration"  width="15%" data-toggle="tooltip" data-placement="auto" title="Click to sort by Course Duration">Duration</th>
                                             <th class="text-center" data-toggle="tooltip" width="15%" data-placement="auto" title="Options">Options</th>
                                         </tr>  
                                     </thead>
@@ -188,10 +198,9 @@ include 'includes/checkInvalidUser.php';
                                         while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC)) {
                                             //$rows['courseId'];
                                             echo "<tr>";
-                                            echo"<td class='name'>" . $rows_course['courseName'] . "</td>";
-                                            echo"<td class='category'>" . $rows_course['courseCategory'] . "</td>";
+                                            echo"<td class='cname'>" . $rows_course['courseName'] . "</td>";
+                                            echo"<td class='sname'>" . $rows_course['courseCategory'] . "</td>";
                                             echo"<td class='fees text-center'>" . $rows_course['fees'] . " ₹</td>";
-                                            echo"<td class='duration text-center'>" . $rows_course['courseDuration'] . "</td>";
                                             echo"<td class='text-center'>
                                                         <button id=\"btn-edit-event\"  onclick=\"edit_event('" . $rows_course['courseId'] . "')\"><i style='color:darkgreen;' data-toggle='tooltip' data-placement='auto' title='Edit' class='fa fa-wrench'></i></button>
                                                         &nbsp;

@@ -10,7 +10,7 @@ include 'includes/checkInvalidUser.php';
         <link href="css/profile.css" rel="stylesheet"/>
         <link href="css/course.css" rel="stylesheet"/>
         <link href="css/course-add.css" rel="stylesheet"/>
-        <script src="js/course-add.js?v=5"></script>
+        <script src="js/course-edit.js"></script>
         <script>
             $(document).ready(function () {
                 var options = {
@@ -45,33 +45,49 @@ include 'includes/checkInvalidUser.php';
 
                     <div class="panel panel-default course-content">
                         <div class="panel-heading">
-                            <i class="fa fa-graduation-cap"></i> Add Course
+                            <i class="fa fa-graduation-cap"></i> Edit Course
                             <a href="course.php" style="float: right;"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
+
+                        <?php
+                        $cid = $_GET['id'];
+                        $id = base64_decode($cid);
+                        $sql = "select course.* from wtfindin_arm.course where courseId = :id";
+                        $stmt = $DB->prepare($sql);
+                        $stmt->bindValue(":id", $id);
+                        $stmt->execute();
+                        $rows = $stmt->fetch();
+                        ?>
+
                         <div class="panel-body">
                             <form id="course-add">
                                 <div class="inputRow">
                                     <div class="f-h col-md-3">Course Name : <b class="r">*</b></div>
                                     <div class="col-md-9">
-                                        <input class="form-control" type="text" id="course_name" name='course_name' placeholder="Course Name" value=""/>          
+                                        <input class="form-control" type="text" id="course_name" name='course_name' placeholder="Course Name" value="<?php echo $rows['courseName']; ?>"/>          
                                     </div>
                                 </div>
 
                                 <div class="inputRow">
-                                    <div class="f-h col-md-3">Course Category : <b class="r">*</b></div>
-                                    <div class="col-md-9" style=" padding-bottom: 15px;">
-
-                                        Tuition : <input type="radio" name="course_category" value="t"/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Coaching : <input type="radio" name="course_category" value="c"/>
+                                    <div class="f-h col-md-3" style="padding-bottom:10px; padding-top:8px;">Course Category : <b class="r">*</b></div>
+                                    <div class="f-h col-md-9" style="padding-bottom:10px; padding-top:8px;">
+                                        <?php
+                                        $cat = "";
+                                        if($rows['courseCategory'] == 'c') {
+                                            $cat = 'COACHING';
+                                        }else{
+                                            $cat = 'TUITION';
+                                        }
+                                        ?>
+                                        <label><?php echo $cat; ?></label>
                                     </div>
                                 </div>
 
-                                <div style="display: none;" id="fee-structure">
+                                <div <?php if($rows['courseCategory'] == 't'){echo "style='display: none;'";}?> id="fee-structure">
                                     <div class="inputRow">
                                         <div class="f-h col-md-3">Fees : <b class="r">*</b></div>
                                         <div class="col-md-9">
-                                            <input class="form-control" style="width: 200px;" maxlength="6" type="text" id="course_fee" name='course_fee' placeholder="Rupees" value=""/>          
+                                            <input class="form-control" style="width: 200px;" maxlength="6" type="text" id="course_fee" name='course_fee' placeholder="Rupees" value="<?php echo $rows['fees']; ?>"/>          
                                         </div>
                                     </div>
 
@@ -79,7 +95,7 @@ include 'includes/checkInvalidUser.php';
                                         <div class="f-h col-md-3">Duration : <b class="r">*</b></div>
 
                                         <div class="col-md-9">
-                                            <input class="form-control" style="width: 200px;" maxlength="2" type="text" id="course_duration" name='course_duration' placeholder="Months" value=""/> 
+                                            <input class="form-control" style="width: 200px;" maxlength="2" type="text" id="course_duration" name='course_duration' placeholder="Months" value="<?php echo $rows['courseDuration']; ?>"/> 
                                         </div>
                                     </div>
                                 </div>
@@ -88,11 +104,8 @@ include 'includes/checkInvalidUser.php';
                                 <div class="inputRow">
                                     <div class="f-h col-md-3"></div>
                                     <div style="padding-top: 25px;" class="inputRow col-lg-9">
-                                        <button style="width: 100px;" type="button" class="btn btn-primary" name="btn-course-add" id="btn-course-add">
-                                            <span class="fa fa-plus"></span> Add</button> 
-
-                                        <button style="width: 100px;" type="button" class="btn btn-primary" name="btn-course-clear" id="btn-course-clear">
-                                            <span class="fa fa-refresh"></span> Clear</button> 
+                                        <button style="width: 100px;" type="button" class="btn btn-primary" name="btn-course-edit" id="btn-course-edit">
+                                            <span class="fa fa-pencil"></span> Update</button> 
                                     </div>
                                 </div>
                             </form>

@@ -150,20 +150,10 @@ $(document).ready(function () {
                     {
                         msg: 'Please enter course fee !!'
                     });
-        }  else if (($('input:radio[name=course_category]:checked').val() == 'c') && ($('#course_fee').val() <= 0)) {
-            Lobibox.alert("error",
-                    {
-                        msg: 'Please enter correct course fee !!'
-                    });
         } else if (($('input:radio[name=course_category]:checked').val() == 'c') && ($('#course_duration').val() == "")) {
             Lobibox.alert("error",
                     {
                         msg: 'Please enter course duration !!'
-                    });
-        } else if (($('input:radio[name=course_category]:checked').val() == 'c') && ($('#course_duration').val() <= 0)) {
-            Lobibox.alert("error",
-                    {
-                        msg: 'Please enter correct course duration !!'
                     });
         } else {
             var cat = $('input:radio[name=course_category]:checked').val();

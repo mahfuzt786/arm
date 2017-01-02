@@ -9,7 +9,7 @@ include 'includes/checkInvalidUser.php';
         <?php require_once 'includes/include.php'; ?>
         <link href="css/profile.css?v=3" rel="stylesheet"/>
         <link href="css/course.css" rel="stylesheet"/>
-        <script src="js/course.js"></script>
+        <script src="js/course.js?v=3"></script>
         <script>
             $(document).ready(function () {
                 var options = {
@@ -28,6 +28,42 @@ include 'includes/checkInvalidUser.php';
                     container: 'body'
                 });
             });
+            function delete_course(id){
+                Lobibox.confirm({
+                    msg: "Are you sure you want to delete this Course?",
+                    callback: function ($this, type, ev) {
+                        //Your code goes here
+                        if(type=='yes'){
+                            $.ajax({
+                                url: "includes/course_arm.php",
+                                type: "POST",
+                                data: {
+                                    action: 'delete_course',
+                                    id: id
+                                },
+                                success: function(result){
+                                    if(result==0) {
+                                        Lobibox.alert("success",
+                                        {
+                                            msg: 'Course Successfully Deleted ',
+                                            callback: function ($this, type, ev) {
+                                                if(type=='ok'){
+                                                    location.replace('course.php');}
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        Lobibox.alert("error",
+                                        {
+                                            msg: result
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
         </script>
     </head>
     <body>
@@ -65,8 +101,10 @@ include 'includes/checkInvalidUser.php';
                                         $width = 'col-md-10';
                                     }
                                     ?>
-                                    <div class="<?php echo $width;
-                                    echo 'full_width'; ?>" style="padding: 0px;">
+                                    <div class="<?php
+                                    echo $width;
+                                    echo 'full_width';
+                                    ?>" style="padding: 0px;">
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                             <input class="form-control search" placeholder="Search"/>
@@ -94,40 +132,33 @@ include 'includes/checkInvalidUser.php';
                                         $result_course->execute();
                                         $butt = "";
                                         $redirect = "";
+                                        $flag = "";
+                                        //b - both
+                                        //e - edit
+                                        //d - delete
+                                        //n - none
                                         if ($_SESSION['rights']["COURSE"]["medit"] == "1" && $_SESSION['rights']["COURSE"]["mdelete"] == "1") {
-                                            $butt = "<td class='text-center'>
-                                                        <button id=\"btn-edit-event\"  onclick=\"edit_event('" . $c['courseId'] . "')\"><i style='color:darkgreen;' data-toggle='tooltip' data-placement='auto' title='Edit' class='fa fa-wrench'></i></button>
-                                                        &nbsp;
-                                                        <button id=\"btn-delete-event\" onclick=\"delete_event('" . $c['courseId'] . "')\"><i style='color:red;' data-toggle='tooltip' data-placement='auto' title='Delete' class='fa fa-trash'></i></button>
-                                                    </td>";
+                                            $flag = 'b';
                                             $redirect = 'y';
                                         } else if ($_SESSION['rights']["COURSE"]["medit"] == "1") {
-                                            $butt = "<td class='text-center'>
-                                                        <button id=\"btn-edit-event\"  onclick=\"edit_event('" . $c['courseId'] . "')\"><i style='color:darkgreen;' data-toggle='tooltip' data-placement='auto' title='Edit' class='fa fa-wrench'></i></button>
-                                                        &nbsp;
-                                                    </td>";
+                                            $flag = 'e';
                                             $redirect = 'y';
                                         } else if ($_SESSION['rights']["COURSE"]["mdelete"] == "1") {
-                                            $butt = "<td class='text-center'>
-                                                        <button id=\"btn-delete-event\" onclick=\"delete_event('" . $c['courseId'] . "')\"><i style='color:red;' data-toggle='tooltip' data-placement='auto' title='Delete' class='fa fa-trash'></i></button>
-                                                    </td>";
+                                            $flag = 'd';
                                             $redirect = 'n';
                                         } else {
-                                            $butt = "<td class='text-center'>
-                                                        View Only
-                                                    </td>";
                                             $redirect = 'n';
                                         }
-                                        
+
                                         while ($rows_course = $result_course->fetch(PDO::FETCH_ASSOC)) {
                                             //$rows['courseId'];
                                             echo "<tr>";
                                             $cat = base64_encode($rows_course['courseCategory']);
                                             $name = base64_encode($rows_course['courseName']);
-                                            if($redirect == 'y'){
-                                            echo"<td class='name'><a style='font-weight : bold;' href='subject.php?c=" . $cat . "&n=" . $name . "'>" . $rows_course['courseName'] . "</a></td>";
-                                            }else{
-                                               echo"<td class='name'>" . $rows_course['courseName'] . "</td>"; 
+                                            if ($redirect == 'y') {
+                                                echo"<td class='name'><a style='font-weight : bold;' href='subject.php?c=" . $cat . "&n=" . $name . "'>" . $rows_course['courseName'] . "</a></td>";
+                                            } else {
+                                                echo"<td class='name'>" . $rows_course['courseName'] . "</td>";
                                             }if ($rows_course['courseCategory'] == 'c') {
                                                 $category = 'Coaching';
                                             } else {
@@ -136,7 +167,26 @@ include 'includes/checkInvalidUser.php';
                                             echo"<td class='category'>" . $category . "</td>";
                                             echo"<td class='fees text-center'>" . $rows_course['fees'] . " ₹</td>";
                                             echo"<td class='duration text-center'>" . $rows_course['courseDuration'] . "</td>";
-                                            echo $butt;
+                                            if ($flag == "b") {
+                                                echo "<td class='text-center'>
+                                                        <button id='btn-edit-course' onclick=\"window.location='course-edit.php?id=" . base64_encode($rows_course['courseId']) . "'\"><i style='color:darkgreen;' data-toggle='tooltip' data-placement='auto' title='Edit' class='fa fa-wrench'></i></button>
+                                                        &nbsp;
+                                                        <button id='btn-delete-course' onclick=\"delete_course('" . base64_encode($rows_course['courseId']) . "')\"><i style='color:red;' data-toggle='tooltip' data-placement='auto' title='Delete' class='fa fa-trash'></i></button>
+                                                    </td>";
+                                            } else if ($flag == "e") {
+                                                echo "<td class='text-center'>
+                                                        <button id='btn-edit-course' onclick=\"window.location='course-edit.php?id=" . base64_encode($rows_course['courseId']) . "'\"><i style='color:darkgreen;' data-toggle='tooltip' data-placement='auto' title='Edit' class='fa fa-wrench'></i></button>
+                                                        &nbsp;
+                                                    </td>";
+                                            } else if ($flag == "d") {
+                                                echo "<td class='text-center'>
+                                                        <button id='btn-delete-course' onclick=\"delete_course('" . base64_encode($rows_course['courseId']) . "')\"><i style='color:red;' data-toggle='tooltip' data-placement='auto' title='Delete' class='fa fa-trash'></i></button>
+                                                    </td>";
+                                            } else {
+                                                echo "<td class='text-center'>
+                                                        View Only
+                                                    </td>";
+                                            }
                                             echo"</tr>";
                                         }
                                         ?>
