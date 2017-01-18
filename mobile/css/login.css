@@ -1,0 +1,198 @@
+.ui-content {
+    padding: 0 2px;
+}
+div.loginHeadMsg {
+    color: #526c5a;
+    font-size: 1.2em;
+    height: 4em;
+    margin: 1em auto auto;
+    text-align: center;
+    width: 70%;
+}
+div.loginErrorMsg {
+    color: #F00;
+    font-size: 0.76em;
+    font-weight: bold;
+    height: 4em;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+div.loginBoxes {
+    height: 12.4em;
+    margin: auto;
+    text-align: center;
+    width: 80%;
+}
+div.loginBoxes div.inputRow {
+    height: 3em;
+    width: 100%;
+}
+div.loginBoxes div.inputRow a#loginBtnSubmit {
+    background-color: #8AA292;
+    color: #FFF;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    float: left;
+    font-size: 0.8em;
+    font-weight: bold;
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: capitalize;
+    width: 100%;
+}
+div.loginBoxes div.inputRow span {
+    color: #000;
+    font-size: 0.86em;
+    line-height: 2em;
+    text-align: center;
+    width: auto;
+    float: left;
+    margin-left: 30%;
+}
+div.loginBoxes div.inputRow .ui-checkbox {
+    float: right;
+    height: 14px;
+    margin: 0.4em 0;
+    position: relative;
+    text-align: center;
+    width: 35px;
+}
+div.loginForgotPassword {
+    height: 9em;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+div.loginForgotPassword span {
+    color: #000;
+    font-size: 0.86em;
+    width: 100%;
+    text-align: center;
+    line-height: 3em;
+    float: left;
+}
+div.loginForgotPassword div.inputRowMed {
+    height: 3em;
+    width: 100%;
+}
+div.loginForgotPassword div.inputRowMed input.loginTxt {
+    background-color: #EEE;
+}
+div.loginForgotPassword div.inputRowMed a#mailPassWord {
+    color: #FFF;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    background-color: #666;
+    float: left;
+    font-size: 0.8em;
+    font-weight: bold;
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+div#popupAlert {
+    background-color: #fff;
+    height: 12em;
+    width: 20em;
+}
+div#popupAlert #sortHeader {
+    height: 2em;
+    background: #8AA292;
+    color: #FFF;
+    text-align: left;
+}
+div#popupAlert #sortHeader h1 {
+    line-height: 2em;
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 15px;
+    text-align: center;
+}
+div#popupAlert p {
+    font-size: 0.86em;
+    margin: 1em 0;
+    color: #000;
+    margin-left: 15px;
+    height: 5em;
+    line-height: 1.5em;
+    text-align: center;
+}
+/** login animation **/
+div#submitting {
+    display: none;
+    height: 100%;
+    left: 0;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 359;
+    /*opacity: 0.9;
+    background: #FFF;*/
+}
+div#upsProcessing {
+    /*background: #FFF;*/
+    height: 230px;   
+    position: absolute;
+    width: 240px;    
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin: auto;
+    right: 0;
+    top: 0;
+    z-index: 988;
+    opacity: 1;
+}
+div#upsProcessing img#top
+{
+    position: absolute;
+    /*top: 350px;
+    left: 508px;*/
+    z-index: 29;
+}
+div#upsProcessing img#fill
+{
+    position: absolute;
+    top: 26px;
+    left: 27px;
+    z-index: 28;
+
+    -webkit-animation: progressSpin 3s; /* Chrome, Safari, Opera */
+    -moz-animation: progressSpin 3s; /* Firefox */	
+    animation: progressSpin 3s; /* IE */		
+
+    -webkit-animation-iteration-count: infinite; /* Chrome, Safari, Opera */
+    -moz-animation-iteration-count: infinite; /* Firefox */	
+    animation-iteration-count: infinite; /* IE */	
+}
+div#upsProcessing img#bottom
+{
+    position: absolute;
+    /*top: 350px;
+    left: 508px;*/
+    z-index: 27;
+}
+/*spinning the middle fill*/
+@-webkit-keyframes progressSpin
+{
+    from {-webkit-transform: rotate(-1080deg);-webkit-animation-timing-function: linear;}
+}
+		
+@-moz-keyframes progressSpin
+{
+    from {-moz-transform: rotate(-1080deg);-moz-animation-timing-function: linear;}
+}
+		
+@-ms-keyframes progressSpin
+{
+    from {-ms-transform: rotate(-1080deg);-ms-animation-timing-function: linear;}
+}

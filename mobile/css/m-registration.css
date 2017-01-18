@@ -1,0 +1,313 @@
+.ui-content {
+    padding: 0 2px;
+}
+div#popupSort {
+    background-color: #fff;
+    height: 30em;
+    width: 18em;
+}
+div#popupSort #sortHeader {
+    height: 2em;
+    background: #8AA292;
+    color: #FFF;
+    text-align: left;
+}
+div#popupSort #sortHeader h1 {
+    line-height: 2em;
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 15px;
+}
+div#popupSort p.belowLines {
+    font-size: 0.86em;
+    margin: 1em 0;
+    color: #000;
+    margin-left: 15px;
+    height: 2em;
+    line-height: 1em;
+    text-transform: capitalize;
+    border-bottom: 1px solid #CCC;
+}
+div#popupSort  p.belowLines:last-child {
+    border-bottom: none;
+}
+div#popupSort p a {
+    color: #526c5a;
+    float: left;
+    text-decoration: none;
+    width: 100%;
+}
+div.detailsAllInfo {
+    margin: 2em auto 2em;
+    width: 90%;
+}
+div.detailsAllInfo span {
+    color: #000;
+    float: left;
+    font-weight: bold;
+    height: 2em;
+    line-height: 2em;
+    margin: 0.5em 0;
+    text-transform: capitalize;
+    width: 100%;
+}
+div.detailsAllInfo div.insideDetailsAll {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 16px #cccccc;
+    float: left;
+    margin-bottom: 0.5em;
+    /*padding: 1.5em;*/
+    width: 100%;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort {
+    border-bottom: 1px solid #ccc;
+    float: left;
+    height: auto;
+    margin: 0.2em 1.5em 0.3em;
+    min-height: 2em;
+    width: 90%;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtTitle {
+    font-size: 0.73em;
+    font-weight: bolder;
+    color: #000;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    text-transform: capitalize;
+    margin: 0;
+    height: auto;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc {
+    font-size: 0.8em;
+    color: #000;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    text-transform: capitalize;
+    font-weight: 500;
+    height: auto;
+    margin: 0;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc div.ui-input-text{
+    height: 3em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc input.txtInput {
+    float: left;
+    width: 90%;
+    height: 3em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc div.ui-select {
+    height: 3em;
+    margin-top: 0.25em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc .ui-select .ui-btn {
+    height: 15px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc .ui-select .ui-btn span {
+    height: 1em;
+    line-height: 1em;
+    margin: 0;
+    text-align: left;
+    font-size: 0.86em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionPayment span.txtTitle {
+    font-size: 0.73em;
+    font-weight: bolder;
+    color: #000;
+    float: left;
+    width: 50%;
+    overflow: hidden;
+    text-transform: capitalize;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionPayment span.txtDesc {
+    font-size: 0.8em;
+    color: #000;
+    float: left;
+    width: 50%;
+    overflow: hidden;
+    text-transform: capitalize;
+    font-weight: 500;
+    height: auto;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionAllergy {
+    min-height: 5em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionAllergy span.txtAllergyName {
+    color: #000;
+    float: left;
+    font-size: 0.73em;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin: 15px 0 0;
+    overflow: hidden;
+    text-transform: uppercase;
+    width: 50%;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.btnLink {
+    background: #8aa292 !important;
+    border-radius: 8px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.btnLink a.btnUpdatePatient {
+    text-decoration: none;
+    color: #FFF !important;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 0.86em;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionAllergy span.txtAllergyName .ui-checkbox {
+    float: left;
+    margin: 7px 20px 0 0;
+    padding-left: 0;
+    position: relative;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionAllergy span.txtAllergyName .ui-checkbox input {
+    left: -2px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionAllergy span.txtAllergyName .ui-radio {
+    float: left;
+    margin: 7px 25px 0 0;
+    padding-left: 0;
+    position: relative;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionAllergy span.txtAllergyName .ui-radio input {
+    left: -2px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtDesc strong {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtAllergyHead {
+    font-size: 0.73em;
+    font-weight: bolder;
+    color: #000;
+    float: left;
+    width: auto;
+    overflow: hidden;
+    height: auto !important;
+    text-transform: none;
+    margin-right: 15px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.takeInput {
+    float: left;
+    height: 3em;
+    margin: 0.5em 0 0;
+    width: 9em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.takeInput a.btnPowOrCap {
+    border-radius: 4px;
+    float: left;
+    font-size: 0.86em;
+    margin: 0;
+    text-align: center;
+    text-transform: capitalize;
+    width: 2em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.takeInput a.active {
+    background: #8aa292;
+    color: #fff !important;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.takeInput output {
+    float: left;
+    font-size: 0.86em;
+    height: 2.5em;
+    line-height: 3em;
+    margin: 0 5px;
+    text-transform: capitalize;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.detailRetainer {
+    float: left;
+    width: auto;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.detailRetainer div.ui-select {
+    float: left;
+    height: 3em;
+    margin-top: 0.25em;
+    margin-right: 7px;
+    width: 8em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.detailRetainer .ui-select .ui-btn {
+    height: 15px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.detailRetainer .ui-select .ui-btn span {
+    height: 1em;
+    line-height: 1em;
+    margin: 0;
+    text-align: left;
+    font-size: 0.73em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.detailRetainer div.ui-input-text {
+    background-color: #f6f6f6;
+    float: right;
+    height: 3em;
+    margin: 0;
+    width: 4em;
+    margin-top: 0.25em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.detailRetainer div.ui-input-text input.txtRetainer {
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+    width: 4em;
+}
+div.patientOperations {
+    margin: auto;
+    width: 90%;
+    margin-bottom: 2em;
+}
+div.patientOperations a.btnBackColor {
+    background: #8aa292;
+    border-radius: 4px;
+    color: #fff !important;
+    font-size: 0.86em;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+div.patientOperations a.btnBackColor:first-child:hover {
+    background: #8AA292;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtAllergyHead .ui-checkbox {
+    float: left;
+    margin: 12px 20px 0 0;
+    padding-left: 0;
+    position: relative;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort span.txtAllergyHead .ui-checkbox input {
+    left: -2px;
+}
+div#submitting {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999999;
+}
+span.loader_span {
+    /*background-image: url("../images/reg-loader.gif");
+    background-position: 25px 5px;
+    background-repeat: no-repeat;
+    height: 60px;
+    margin-left: 44%;
+    margin-top: 12%;
+    position: absolute;
+    text-align: center;
+    width: 100px;*/
+    background-image: url("../images/reg-loader.gif");
+    background-repeat: no-repeat;
+    border-radius: 2.25em;
+    display: block;
+    height: 4.75em;
+    left: 50%;
+    margin: 0;
+    padding: 0.0625em;
+    position: absolute;
+    top: 50%;
+    width: 4.75em;
+}

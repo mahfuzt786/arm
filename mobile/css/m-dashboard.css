@@ -1,0 +1,150 @@
+.ui-content {
+    padding: 0 2px;
+}
+div.detailsAllInfo {
+    margin: 0.1em auto 2em;
+    width: 90%;
+}
+div.detailsAllInfo div.wrapper {
+    float: left;
+    border-bottom: 1px solid #ccc;
+    height: auto;
+    width: 100%;
+    padding-bottom: 0.5em;
+}
+div.detailsAllInfo div.outsideDetailsAll {    
+    float: left;
+    height: 2em;
+    margin: 0.5em 0;
+    width: 100%;
+}
+div.detailsAllInfo div.outsideDetailsAll span.info {
+    float: left;
+    width: 80%;
+    color: #000;
+    font-weight: bold;
+    height: 2em;
+    line-height: 2em;
+    text-transform: capitalize;
+}
+div.detailsAllInfo div.outsideDetailsAll span.edit {
+    float: left;
+    width: 20%;
+    text-align: right;
+}
+div.detailsAllInfo div.outsideDetailsAll span.edit a.ui-btn {
+    background: #8aa292 none repeat scroll 0 0;
+    border-radius: 4px;
+    color: #fff;
+    float: right;
+    padding: 0 0.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 10px;
+}
+div.detailsAllInfo div.outsideDetailsAll span.edit a.ui-btn i.fa {
+    color: #fff;
+    font-size: 0.86em;
+}
+div.detailsAllInfo div.insideDetailsAll {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 2px 16px #cccccc;
+    float: left;
+    margin-bottom: 1em;
+    padding: 0.5em 2.5%;
+    width: 95%;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort {
+    float: left;
+    height: auto;
+    min-height: 3em;
+    width: 100%;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.headRetainer {
+    float: left;
+    width: 100%;
+    height: 2em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.headRetainer span {
+    font-size: 0.73em;
+    font-weight: bolder;
+    color: #000;
+    float: left;
+    width: 33%;
+    overflow: hidden;
+    text-transform: capitalize;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.priceRetainer {
+    float: left;
+    width: 100%;
+    height: 4em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.priceRetainer span {
+    font-size: 0.73em;
+    font-weight: bolder;
+    color: #000;
+    float: left;
+    width: 33%;
+    overflow: hidden;
+    text-transform: capitalize;
+    text-align: center;
+    height: 5em;
+    line-height: 5em;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionShort div.priceRetainer span a {
+    background: #8aa292 none repeat scroll 0 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-left: 2.5%;
+    padding-left: 0;
+    padding-right: 0;
+    width: 90%;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionOrder {
+    float: left;
+    height: auto;
+    min-height: 2em;
+    width: 100%;
+    margin-bottom: 10px;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionOrder div.orderHead {
+    float: left;
+    width: 100%;
+    height: 2em;
+    background: #ccc;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionOrder div.orderHead span {
+    float: left;
+    width: 22%;
+    font-size: 0.76em;
+    color: #526c5a;
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: center;
+    text-transform: capitalize;
+    overflow: hidden;
+}
+div.detailsAllInfo div.insideDetailsAll div.descriptionOrder div.orderDesc {
+    float: left;
+    width: 95%;
+    height: auto;
+    color: #000;
+    font-size: 0.86em;
+    padding: 0.5em 2.5%;
+}
+div.pracName {
+    background: #fff none repeat scroll 0 0;
+    font-size: 0.86em;
+    font-weight: bold;
+    margin-top: 2.1em;
+    padding: 0.7em 0;
+    text-align: center;
+    text-transform: capitalize;
+}
