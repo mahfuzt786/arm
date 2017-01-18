@@ -158,10 +158,91 @@ $(document).ready(function () {
         }
     });
     $('#subject_name').on('change', function () {
-        if ($('subject_name').val() != 'select') {
+        if ($('#subject_name').val() != 'select') {
             $('#subject_id').val($('subject_name').val());
         }
     });
+
+
+
+    /////table
+    var options_t = {
+        valueNames: ['cname', 'sname', 'fees', 'options'],
+        page: 3,
+        plugins: [
+            ListPagination({
+                innerWindow: 3,
+                left: 2,
+                right: 2
+            })
+        ]
+    };
+    var options_c = {
+        valueNames: ['cname', 'sname', 'options'],
+        page: 3,
+        plugins: [
+            ListPagination({
+                innerWindow: 3,
+                left: 2,
+                right: 2
+            })
+        ]
+    };
+
+
+
+    $('#course_name').on('change', function () {
+        if ($('#course_name').val() != 'select') {
+            var id = $('#course_name').val();
+            $.ajax({
+                url: "includes/subject_arm.php",
+                type: "POST",
+                data: {
+                    action: 'checkCourseCategory',
+                    courseid: id
+                },
+                success: function (result) {
+                    //alert (result);
+                    if (result == 1) { //coaching
+                        $('#fee-structure').hide();
+                        $("#subject").hide();
+                        $("#subject-table").load("subject_table.php?v=c");
+                        $("#subject").show();
+                        //new List('subject', options_c);
+                    } else if (result == 2) { //tuition
+                        
+                        $('#fee-structure').show();
+                        $("#subject").hide();
+                        $("#subject-table").load("subject_table.php?v=t");
+                        $("#subject").show();
+                        //new List('subject', options_t);
+                    } else {
+                        alert('error');
+                    }
+                }
+            });
+        }else{$("#subject").hide();}
+    });
+
+    if ($('#cate').val() != "") {
+        //alert($.trim($('#cate').val()));
+        if ($.trim($('#cate').val()) == "t") {
+            //alert ("inside tuition");
+            new List('subject', options_t);
+            $("#header_tuition").show();
+            $("#header_coaching").hide();
+        } else {
+            //alert ("inside coaching");
+            new List('subject', options_c);
+            $("#header_tuition").hide();
+            $("#header_coaching").show();
+        }
+    }
+
+    $('[data-toggle="tooltip"]').tooltip({
+        container: 'body'
+    });
+    /////end table
     function subject_master_delete() {
         Lobibox.confirm({
             msg: "Are you sure you want to delete this Subject?",
@@ -315,7 +396,7 @@ $(document).ready(function () {
                                 }
                             });
 
-                } 
+                }
             }
         });
     }

@@ -19,6 +19,8 @@ if ($action == "checkSubjectName") {
     subjectmasterupdate($DB);
 } else if ($action == "subjectmasterdelete") {
     subjectmasterdelete($DB);
+} else if ($action == "checkCourseCategory") {
+    checkCourseCategory($DB);
 } else {
     throw new Exception("Unknown Action: " + $action);
 }
@@ -34,6 +36,24 @@ function checkSubjectName($DB) {
         echo 0;
     } else {
         echo 1;
+    }
+}
+function checkCourseCategory($DB) {
+    $courseid = getRequestPostDefault('courseid', 'null');
+    $sql = "SELECT courseCategory FROM wtfindin_arm.course WHERE courseId = ?";
+
+    $query = $DB->prepare($sql);
+    $query->bindValue(1, $courseid);
+    $query->execute();
+    $rows = $query->fetch();
+    if ($query->rowCount() > 0) { # If rows are found for query
+        if($rows['courseCategory'] == 'c'){
+            echo 1;
+        }else if($rows['courseCategory'] == 't'){
+            echo 2;
+        }
+    } else {
+        echo 0;
     }
 }
 

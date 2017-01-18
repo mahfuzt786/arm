@@ -1,0 +1,68 @@
+.maps{
+    height: 300px;
+    border-style: dotted;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.row.content {height: 450px}
+
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+.phoenixnavbar{
+    background: #2C3E50;
+}
+
+.footer {
+    background-color: #555;
+    background: #2C3E50;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+.parallax {
+    background-image: url("../icon/students1.png");
+    height: 500px;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;} 
+}
+.aboutus{
+    background-color: black;
+    padding: 15px;
+    color: white;
+}
+.aboutheading{
+    font-size: 3em;
+    font-weight: bolder;
+    text-align: center;
+}
+.contactus{
+    text-justify: auto;
+    padding: 15px;
+    background-color: white;
+    color: darkslateblue;
+}
+.image{
+    width: 100%;
+    filter: brightness(50%);
+    -webkit-filter: brightness(50%);
+    -moz-filter: brightness(50%);
+    -o-filter: brightness(50%);
+    -ms-filter: brightness(50%);
+}

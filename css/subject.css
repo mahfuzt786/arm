@@ -1,6 +1,7 @@
 .subject-content{
     height: 88vh;
     display: block;
+    overflow-y: auto;
 }
 .footer-account{
     height: 50px;
