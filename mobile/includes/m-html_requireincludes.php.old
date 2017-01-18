@@ -1,0 +1,20 @@
+<?php        
+    //require_once 'includes/constants.php';
+    require_once '../includes/util.php';
+    require_once '../includes/database-config.php';	/* Database Settings */
+?>
+
+/**** No Internet Page
+    * Tested on:
+    * Windows Firefox
+    * Windows Google Chrome
+    * Windows IE9 and IE10
+    * Android 4.1.1 Chrome
+    * iPad 3 Safari
+    * iPad3 Chrome
+ ****/
+<!--<script>
+    if(!window.navigator.onLine) {
+        location.replace('no-internet/no-net.html');
+    }
+</script>-->

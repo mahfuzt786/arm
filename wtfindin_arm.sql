@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2016 at 06:32 AM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
+-- Generation Time: Jan 18, 2017 at 01:00 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,12 +27,254 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `attendence` (
-`attendenceId` int(11) NOT NULL,
+  `attendenceId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `courseId` int(11) NOT NULL,
   `isAttended` enum('Y','N') NOT NULL DEFAULT 'N',
-  `classDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `classDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`attendenceId`),
+  KEY `userId` (`userId`),
+  KEY `courseId` (`courseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_ban`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_ban` (
+  `ban_id` int(11) NOT NULL,
+  `ban_name` varchar(64) NOT NULL,
+  `ban_ip` varchar(50) NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `ban_reason` varchar(255) NOT NULL
+) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_iplog`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_iplog` (
+  `usr_id` int(11) NOT NULL,
+  `usr_name` varchar(255) NOT NULL,
+  `ipaddr` varchar(50) NOT NULL,
+  `timestamp` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `blab8_iplog`
+--
+
+INSERT INTO `blab8_iplog` (`usr_id`, `usr_name`, `ipaddr`, `timestamp`) VALUES
+(2, 'test2', '::1', 1484733560),
+(3, 'test3', '::1', 1484733948);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_lines`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_lines` (
+  `line_id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_id` int(11) NOT NULL,
+  `from_name` varchar(64) NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `line_txt` text NOT NULL,
+  PRIMARY KEY (`line_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `blab8_lines`
+--
+
+INSERT INTO `blab8_lines` (`line_id`, `from_id`, `from_name`, `timestamp`, `line_txt`) VALUES
+(1, 2, 'test2', 1484733574, 'hello'),
+(2, 2, 'test2', 1484733581, 'hi..'),
+(3, 2, 'test2', 1484733630, '<img src="ui/smilies/innocent.png"  alt=":innocent:" />'),
+(4, 3, 'test3', 1484733968, 'hi test 2'),
+(5, 2, 'test2', 1484733980, 'hello 3..'),
+(6, 2, '', 1484733988, '<span style="font-size:150%;font-weight:bold"> ds (test2)</span>'),
+(7, 3, 'test3', 1484734001, 'ds'),
+(8, 2, 'test2', 1484734077, '<img onclick="play_p(''2'')" class="paint_thumb" src="paintings/2.png" alt="" />');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_online`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_online` (
+  `usr_id` int(11) NOT NULL,
+  `usr_name` varchar(64) NOT NULL,
+  `usr_ip` varchar(50) NOT NULL,
+  `rtime` int(11) NOT NULL
+) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_paintings`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_paintings` (
+  `p_id` int(11) NOT NULL AUTO_INCREMENT,
+  `p_srx` text NOT NULL,
+  `p_sry` text NOT NULL,
+  `p_src` text NOT NULL,
+  `p_bgc` char(6) NOT NULL,
+  `p_views` int(11) NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `usr_id` int(11) NOT NULL,
+  `usr_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`p_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `blab8_paintings`
+--
+
+INSERT INTO `blab8_paintings` (`p_id`, `p_srx`, `p_sry`, `p_src`, `p_bgc`, `p_views`, `timestamp`, `usr_id`, `usr_name`) VALUES
+(1, '113 104 102 99 96 93 90 87 84 81 78 77 75 75 71 71 70 70 70 70 70 70 70 70 72 74 76 79 81 85 88 91 94 96 100 102 104 108 111 115 118 123 129 133 138 143 149 156 162 172 177 185 191 194 198 203 205 207 210 212 214 216 217 217 218 218 218 218 218 218 217 216 215 214 211 210 208 206 205 203 202 198 196 193 191 189 186 183 181 179 176 173 170 168 166 163 161 158 155 152 150 148 146 144 142 139 136 134 131 128 126 122 120 119 117 113 111 108 103 100 97 93 91 87 83 81 79 76 74 74 72 70 70 69 67 67 66 65 65 64 64 64 64 64 64 65 65 0 0 0 0', '51 49 49 49 49 49 49 49 49 49 50 51 52 53 58 60 63 68 73 78 82 88 93 99 106 113 121 126 131 136 141 148 151 156 159 161 163 165 169 172 174 178 180 181 182 184 185 185 185 185 185 185 183 182 179 175 170 166 161 154 147 139 133 125 120 113 106 100 93 89 83 79 74 70 66 63 61 59 55 52 50 47 44 42 39 37 35 34 33 32 30 29 28 26 25 25 25 24 23 23 22 22 22 22 22 22 22 22 22 22 22 22 23 24 24 25 28 28 30 33 34 36 38 39 41 42 44 45 46 47 48 48 50 51 52 54 55 56 57 58 60 61 63 65 67 68 71 0 0 0 0', 'z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4 z4', '', 0, 1484734043, 2, 'test2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_settings` (
+  `set_id` varchar(16) NOT NULL,
+  `set_value` text NOT NULL,
+  `set_fast` smallint(6) NOT NULL,
+  PRIMARY KEY (`set_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `blab8_settings`
+--
+
+INSERT INTO `blab8_settings` (`set_id`, `set_value`, `set_fast`) VALUES
+('acp_timezone', '0', 0),
+('default_timeform', '0', 0),
+('default_language', '5', 0),
+('default_effects', '2', 0),
+('default_sound1', '4', 0),
+('default_sound2', '6', 0),
+('default_sound3', '9', 0),
+('default_sound4', '7', 0),
+('title', 'BlaB!', 0),
+('guests', '1', 0),
+('register', '1', 0),
+('activation', '0', 0),
+('url', 'http://localhost/arm/blab83/', 0),
+('default_mail', 'noreply@localhost', 0),
+('ajax_delay', '500', 0),
+('ajax_update', '6', 0),
+('post_length', '128', 0),
+('post_interv', '2000', 0),
+('admin_lang', '0', 0),
+('wrong_acp', '0', 0),
+('acp_key', '9241c3bea7eb3b0f891276e14c560abb', 0),
+('admin_css', '1', 0),
+('notebook', '...c', 1),
+('meta_desc', '', 0),
+('meta_keyw', '', 0),
+('del_gbuddies', '1', 0),
+('mssg_history', '17520', 0),
+('optimize_tbl', '1', 0),
+('acp_attempts', '180', 0),
+('acp_lhours', '2', 0),
+('show_topic', '1', 0),
+('logo', '<img src="ui/images/logo.png" style="float:right;margin-right:5px" alt="" />', 0),
+('cookie_salt', '38a416af4fecb415', 0),
+('iplog_on', '1', 0),
+('legal_msg', '', 0),
+('80u', '1', 1),
+('80d', '1', 1),
+('int_version', '', 1),
+('faq_page', '<div style="margin:10px">\r\n\r\n<div style="font-weight:bold">\r\n<span style="font-weight:normal">00.</span> \r\n<span class="link_color" onclick="help_all(0);return show_help(''s0'')">Quick start</span></div>\r\n<div id="s0" style="display:block;margin:8px;text-align:justify">Welcome to our chat! Here you can find some information that will help you become familiar with the features that our chat offers. \r\nPlease keep in mind that depending on the settings set by the administrator of this chat the information below might not be 100% accurate.</div>\r\n\r\n<div style="font-weight:bold">\r\n<span style="font-weight:normal">01.</span> \r\n<span class="link_color" onclick="help_all(0);return show_help(''s1'')">Settings</span></div>\r\n<div id="s1" style="display:none;margin:8px;text-align:justify">You can easily alter the settings of the chat - click on SETTINGS at the top of the chat window.\r\nSelect your preferred language, timezone, time format, sound alerts etc.</div>\r\n\r\n<div style="font-weight:bold">\r\n<span style="font-weight:normal">02.</span> \r\n<span class="link_color" onclick="help_all(0);return show_help(''s2'')">Profile</span></div>\r\n<div id="s2" style="display:none;margin:8px;text-align:justify">\r\nWhen you need to set a new password, retype it carefully and also make sure that you enter a correct old password. \r\nIf you are a guest user the old password is automatically set for you.\r\nIf you are a guest user and you want to save your profile, you have to enter a valid email address.</div>\r\n\r\n\r\n<div style="font-weight:bold">\r\n<span style="font-weight:normal">03.</span> \r\n<span class="link_color" onclick="help_all(0);return show_help(''s3'')">Scrolling up and down</span></div>\r\n<div id="s3" style="display:none;margin:8px;text-align:justify">Drag-to-scroll or scroll up and down with the arrow keys of your keyboard. Double click in the chat area gives you the option to select, another double click would let you drag-to-scroll again.</div>\r\n\r\n\r\n<br />\r\n<span class="link_color" onclick="help_all(1);return false">Show all</span>\r\n<b>&middot;</b>\r\n<span class="link_color" onclick="help_all(0);return false">Hide all</span>\r\n</div>', 1),
+('style_template', '\r\ntd,p,div,input,select,textarea{font-size:[15];font-family:[3];text-align:left}\r\ninput,select,textarea{color:#[13];background-color:#[14];padding:2px;border-width:0px;box-sizing:border-box}\r\n.bgcolor_overal{color:#[1];background-color:#[2]}\r\n.bgcolor_panel_bars{color:#[9];background-color:#[10]}\r\n.bgcolor_panel_content{color:#[11];background-color:#[12]}\r\n.bgcolor_top_bar{color:#[5];background-color:#[6]}\r\n.bgcolor_bottom_bar{color:#[7];background-color:#[8]}\r\n.title1{font-size:[17];font-weight:bold;text-transform:uppercase}\r\n.title2{font-size:[18];font-weight:bold;text-transform:uppercase}\r\n.text_small{font-size:[16]}\r\n.panels_extra{[19]}\r\n.boxes_extra{[20]}\r\n.topbar_extra{[21]}\r\n.bottombar_extra{[22]}\r\n.textbox_extra{[23]}\r\n.body_extra{[24]}\r\n.link_color{color:#[4];cursor:pointer}\r\n.oo{font-weight:bold;line-height:13px;white-space:nowrap;color:#[4];margin-left:8px}\r\n', 1),
+('style_delivery', '\r\ntd,p,div,input,select,textarea{font-size:9pt;font-family:verdana,helvetica,sans-serif;text-align:left}\r\ninput,select,textarea{color:#fff;background-color:#444;padding:2px;border-width:0px;box-sizing:border-box}\r\n.bgcolor_overal{color:#fff;background-color:#333}\r\n.bgcolor_panel_bars{color:#fff;background-color:#111}\r\n.bgcolor_panel_content{color:#fff;background-color:#222}\r\n.bgcolor_top_bar{color:#fff;background-color:#222}\r\n.bgcolor_bottom_bar{color:#fff;background-color:#222}\r\n.title1{font-size:12pt;font-weight:bold;text-transform:uppercase}\r\n.title2{font-size:8pt;font-weight:bold;text-transform:uppercase}\r\n.text_small{font-size:8pt}\r\n.panels_extra{border-radius:10px;box-shadow:2px 2px 2px #111}\r\n.boxes_extra{border:0px solid #fff;border-radius:5px;box-shadow:2px 2px 2px #111}\r\n.topbar_extra{border-bottom:1px solid #111;box-shadow:0px 2px 2px #111}\r\n.bottombar_extra{border-top:1px solid #111;box-shadow:0px -2px 2px #111}\r\n.textbox_extra{border:1px solid #fff;box-shadow:2px 2px 2px #111}\r\n.body_extra{background-image:none}\r\n.link_color{color:#FEC400;cursor:pointer}\r\n.oo{font-weight:bold;line-height:13px;white-space:nowrap;color:#FEC400;margin-left:8px}\r\n', 0),
+('slot_1d', 'd|FFFFFF|333333|verdana, sans-serif|FEC400|FFFFFF|222222|FFFFFF|222222|FFFFFF|111111|FFFFFF|222222|000000|FFFFFF|9pt|8pt|12pt|8pt|border-radius:10px;box-shadow:2px 2px 2px #111111|border:0px solid #fff;border-radius:5px;box-shadow:2px 2px 2px #111111|border-bottom:1px solid #111111;box-shadow:0px 2px 2px #111111|border-top:1px solid #111111;box-shadow:0px -2px 2px #111111|border:1px solid #fff;box-shadow:2px 2px 2px #111111|', 1),
+('slot_2d', 'd|FFFFFF|395871|verdana, sans-serif|FEB712|FFFFFF|29435A|FFFFFF|29435A|FFFFFF|29435A|FFFFFF|4B6B87|000000|7E9DB6|9pt|8pt|12pt|8pt|border-radius:10px;box-shadow:2px 2px 2px #1C2E3D|border:0px solid #fff;border-radius:5px;box-shadow:2px 2px 2px #1C2E3D|border-bottom:1px solid #1C2E3D;box-shadow:0px 2px 2px #1C2E3D|border-top:1px solid #1C2E3D;box-shadow:0px -2px 2px #1C2E3D|border:1px solid #fff;box-shadow:2px 2px 2px #1C2E3D|', 1),
+('slot_3d', 'd|000000|C4D3DB|verdana, sans-serif|BC0017|FFFFFF|3E606F|FFFFFF|3E606F|FFFFFF|193441|FFFFFF|3E606F|000000|FFFFFF|9pt|8pt|12pt|8pt||border:1px solid #fff|border-bottom:3px solid #193441|border-top:2px solid #193441|border:1px solid #193441|', 1),
+('slot_4d', 'd|000000|EAE2D2|tahoma, geneva, sans-serif|AA0000|000000|EAE2D2|000000|DED1B9|FFFFFF|AF9B71|000000|CDBC99|000000|FFFFFF|10pt|8pt|13pt|9pt|border-radius:5pt|border:1px solid #fff|background-image:url(ui/images/bg_beige.png);background-repeat:repeat-x;|border-top:1px solid #fff|border:1px solid #BFAD89|background-image:url(ui/images/bg_beige.png);background-repeat:repeat-x;', 1),
+('slot_5d', 'd|000000|C6D3D3|arial, helvetica, sans-serif|273B3B|000000|C6D3D3|FFFFFF|5D7676|FFFFFF|507676|000000|AABFBF|000000|FFFFFF|10pt|9pt|14pt|10pt|border-radius:5pt|border:1px solid #6F8989|background-image:url(ui/images/bg_green.png);background-repeat:repeat-x;|border-top:1px solid #334646|border:1px solid #334646|background-image:url(ui/images/bg_green.png);background-repeat:repeat-x;', 1),
+('slot_6d', 'd|000000|FFFFFF|verdana, sans-serif|105289|000000|FFFFFF|FFFFFF|A1BAD0|FFFFFF|A1BAD0|000000|CADCEB|000000|FFFFFF|9pt|8pt|12pt|9pt|border-radius:5pt;box-shadow:2px 2px 2px #39424A|border-radius:5pt;border:2px solid #105289|background-image:url(ui/images/bg_blue.png);background-repeat:repeat-x;|border-top:1px solid #105289;box-shadow:2px -2px 2px #39424A|border:1px solid #EEEEEE;box-shadow:2px 2px 2px #39424A|background-image:url(ui/images/bg_blue.png);background-repeat:repeat-x;', 1),
+('slot_7d', 'd|000000|EEEEEE|arial, sans-serif|5D0000|FFFFFF|A11A1A|FFFFFF|A11A1A|FFFFFF|A11A1A|333333|DDDDDD|000000|EEEEEE|9pt|8pt|12pt|8pt|box-shadow:2px 2px 2px #333333|box-shadow:2px 2px 2px #333333|box-shadow:0px 2px 2px #5D0000|box-shadow:0px -2px 2px #5D0000|border:1px solid #fff;box-shadow:2px 2px 2px #333333|', 1),
+('slot_8d', 'd|FFFFFF|823E26|verdana, sans-serif|FFF01C|FFFFFF|5E2D1B|FFFFFF|5E2D1B|FFFFFF|5E2D1B|FFFFFF|733721|000000|FFFFFF|9pt|8pt|12pt|9pt|border-radius:5pt;box-shadow:2px 2px 2px #31170D|border-radius:5pt;box-shadow:2px 2px 2px #31170D|box-shadow:2px 2px 2px #31170D;opacity:0.6;|box-shadow:2px -2px 2px #31170D;opacity:0.6;|border:1px solid #823E26;box-shadow:2px 2px 2px #31170D|background-image:url(ui/images/bg_circles.png);background-repeat:no-repeat', 1),
+('slot_9d', 'd|000000|EEEEEE|arial, sans-serif|29435A|333333|CCCCCC|333333|CCCCCC|333333|BBBBBB|333333|DDDDDD|000000|EEEEEE|9pt|8pt|12pt|8pt|box-shadow:2px 2px 2px #666666|box-shadow:2px 2px 2px #666666|box-shadow:0px 2px 2px #666666|box-shadow:0px -2px 2px #666666|border:1px solid #fff;box-shadow:2px 2px 2px #666666|', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_style`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_style` (
+  `sid` smallint(6) NOT NULL,
+  `value` text NOT NULL,
+  `desktop` smallint(6) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `blab8_style`
+--
+
+INSERT INTO `blab8_style` (`sid`, `value`, `desktop`) VALUES
+(1, 'fff', 1),
+(2, '333', 1),
+(3, 'verdana, sans-serif', 1),
+(4, 'FEC400', 1),
+(5, 'fff', 1),
+(6, '222', 1),
+(7, 'fff', 1),
+(8, '222', 1),
+(9, 'fff', 1),
+(10, '111', 1),
+(11, 'fff', 1),
+(12, '222', 1),
+(13, 'fff', 1),
+(14, '444', 1),
+(15, '9pt', 1),
+(16, '8pt', 1),
+(17, '12pt', 1),
+(18, '9pt', 1),
+(19, 'border-radius:10px;box-shadow:2px 2px 2px #111', 1),
+(20, 'border:0px solid #fff;border-radius:5px;box-shadow:2px 2px 2px #111', 1),
+(21, 'border-bottom:1px solid #111;box-shadow:0px 2px 2px #111', 1),
+(22, 'border-top:1px solid #111;box-shadow:0px -2px 2px #111', 1),
+(23, 'border:1px solid #fff;box-shadow:2px 2px 2px #111', 1),
+(24, 'background-image:none', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blab8_users`
+--
+
+CREATE TABLE IF NOT EXISTS `blab8_users` (
+  `usr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usr_name` varchar(64) NOT NULL,
+  `usr_pass` char(32) NOT NULL,
+  `usr_mail` varchar(64) NOT NULL,
+  `usr_join_date` int(11) NOT NULL,
+  `usr_status` varchar(8) NOT NULL,
+  PRIMARY KEY (`usr_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `blab8_users`
+--
+
+INSERT INTO `blab8_users` (`usr_id`, `usr_name`, `usr_pass`, `usr_mail`, `usr_join_date`, `usr_status`) VALUES
+(1, 'test', '7889b43c28b046d2abcfb9df9b2a7bd9', 'test@localhost', 1484733421, '0'),
+(2, 'test2', '215d7cb24c36dcf9a5644b6957845557', 'test2@localhost.in', 1484733545, '0'),
+(3, 'test3', 'e904dea7d578122577fbe3345ed4d425', 'test3@local.in', 1484733923, '0');
 
 -- --------------------------------------------------------
 
@@ -41,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `attendence` (
 --
 
 CREATE TABLE IF NOT EXISTS `class` (
-`classId` int(11) NOT NULL,
+  `classId` int(11) NOT NULL AUTO_INCREMENT,
   `className` varchar(3000) NOT NULL,
   `subjectId` int(11) NOT NULL,
   `teacherName` varchar(1000) NOT NULL,
@@ -49,8 +291,10 @@ CREATE TABLE IF NOT EXISTS `class` (
   `classDays` varchar(1000) NOT NULL,
   `classDesc` varchar(30000) NOT NULL,
   `classWeeklyDays` varchar(1000) NOT NULL,
-  `classType` enum('alternate','regular') NOT NULL DEFAULT 'alternate'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `classType` enum('alternate','regular') NOT NULL DEFAULT 'alternate',
+  PRIMARY KEY (`classId`),
+  KEY `subjectId` (`subjectId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -59,12 +303,13 @@ CREATE TABLE IF NOT EXISTS `class` (
 --
 
 CREATE TABLE IF NOT EXISTS `course` (
-`courseId` int(11) NOT NULL,
+  `courseId` int(11) NOT NULL AUTO_INCREMENT,
   `courseName` varchar(300) NOT NULL,
   `courseCategory` enum('t','c') NOT NULL,
   `fees` varchar(100) NOT NULL,
-  `courseDuration` varchar(300) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+  `courseDuration` varchar(300) NOT NULL,
+  PRIMARY KEY (`courseId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `course`
@@ -145,7 +390,7 @@ INSERT INTO `course` (`courseId`, `courseName`, `courseCategory`, `fees`, `cours
 --
 
 CREATE TABLE IF NOT EXISTS `exam` (
-`examId` int(11) NOT NULL,
+  `examId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `courseId` int(11) NOT NULL,
   `subjectId` int(11) NOT NULL,
@@ -154,8 +399,12 @@ CREATE TABLE IF NOT EXISTS `exam` (
   `examType` enum('daily','week','month') NOT NULL DEFAULT 'week',
   `examDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `examDay` varchar(100) NOT NULL,
-  `isActive` enum('Y','N') NOT NULL DEFAULT 'Y'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `isActive` enum('Y','N') NOT NULL DEFAULT 'Y',
+  PRIMARY KEY (`examId`),
+  KEY `userId` (`userId`),
+  KEY `courseId` (`courseId`),
+  KEY `subjectId` (`subjectId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -164,10 +413,11 @@ CREATE TABLE IF NOT EXISTS `exam` (
 --
 
 CREATE TABLE IF NOT EXISTS `fees` (
-`feeId` int(10) NOT NULL,
+  `feeId` int(10) NOT NULL AUTO_INCREMENT,
   `subjectId` int(10) NOT NULL,
-  `fee` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fee` int(10) NOT NULL,
+  PRIMARY KEY (`feeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -176,13 +426,15 @@ CREATE TABLE IF NOT EXISTS `fees` (
 --
 
 CREATE TABLE IF NOT EXISTS `menu` (
-`menuid` bigint(20) unsigned NOT NULL,
+  `menuid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(100) NOT NULL,
   `menu_icon` varchar(50) NOT NULL,
   `url` varchar(50) NOT NULL,
   `menu_div` varchar(30) NOT NULL,
-  `display` enum('y','n') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `display` enum('y','n') NOT NULL,
+  PRIMARY KEY (`menuid`),
+  UNIQUE KEY `menuid` (`menuid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `menu`
@@ -207,7 +459,8 @@ CREATE TABLE IF NOT EXISTS `menurights` (
   `madd` enum('1','0') NOT NULL DEFAULT '0',
   `medit` enum('1','0') NOT NULL DEFAULT '0',
   `mdelete` enum('1','0') NOT NULL DEFAULT '0',
-  `view` enum('1','0') NOT NULL DEFAULT '0'
+  `view` enum('1','0') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`userid`,`menuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -253,13 +506,16 @@ INSERT INTO `module` (`modulegroupcode`, `modulegroupname`, `modulecode`, `modul
 --
 
 CREATE TABLE IF NOT EXISTS `progress` (
-`progressId` int(11) NOT NULL,
+  `progressId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `courseId` int(11) NOT NULL,
   `remark` varchar(30000) NOT NULL,
   `isReportSent` enum('Y','N') NOT NULL DEFAULT 'N',
-  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`progressId`),
+  KEY `userId` (`userId`),
+  KEY `courseId` (`courseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -268,14 +524,17 @@ CREATE TABLE IF NOT EXISTS `progress` (
 --
 
 CREATE TABLE IF NOT EXISTS `reminders` (
-`reminderId` int(11) NOT NULL,
+  `reminderId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `courseId` int(11) NOT NULL,
   `remSubject` varchar(1000) NOT NULL,
   `remDesc` varchar(30000) NOT NULL,
   `remType` enum('fees','attendence','result') DEFAULT NULL,
-  `remDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `remDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`reminderId`),
+  KEY `userId` (`userId`),
+  KEY `courseId` (`courseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -284,9 +543,10 @@ CREATE TABLE IF NOT EXISTS `reminders` (
 --
 
 CREATE TABLE IF NOT EXISTS `role` (
-`roleid` int(3) NOT NULL,
-  `rolename` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `roleid` int(3) NOT NULL AUTO_INCREMENT,
+  `rolename` varchar(50) NOT NULL,
+  PRIMARY KEY (`roleid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `role`
@@ -327,9 +587,11 @@ INSERT INTO `rolerights` (`rr_roleid`, `rr_modulecode`, `rr_create`, `rr_edit`, 
 --
 
 CREATE TABLE IF NOT EXISTS `subject` (
-`subjectId` int(11) NOT NULL,
-  `courseId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `subjectId` int(11) NOT NULL AUTO_INCREMENT,
+  `courseId` int(11) NOT NULL,
+  PRIMARY KEY (`subjectId`),
+  KEY `courseId` (`courseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -338,9 +600,10 @@ CREATE TABLE IF NOT EXISTS `subject` (
 --
 
 CREATE TABLE IF NOT EXISTS `subjectmaster` (
-`subjectId` int(10) NOT NULL,
-  `subjectName` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `subjectId` int(10) NOT NULL AUTO_INCREMENT,
+  `subjectName` varchar(50) NOT NULL,
+  PRIMARY KEY (`subjectId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `subjectmaster`
@@ -359,7 +622,7 @@ INSERT INTO `subjectmaster` (`subjectId`, `subjectName`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-`userId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `email` varchar(300) NOT NULL,
@@ -377,8 +640,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `qualification` varchar(300) NOT NULL,
   `profession` varchar(300) NOT NULL,
   `pic` varchar(100) DEFAULT NULL,
-  `roleid` int(3) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `roleid` int(3) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user`
@@ -395,10 +659,13 @@ INSERT INTO `user` (`userId`, `firstName`, `lastName`, `email`, `phone`, `loginI
 --
 
 CREATE TABLE IF NOT EXISTS `usercourse` (
-`userCourseId` int(11) NOT NULL,
+  `userCourseId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
-  `courseId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `courseId` int(11) NOT NULL,
+  PRIMARY KEY (`userCourseId`),
+  KEY `userId` (`userId`),
+  KEY `courseId` (`courseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -407,11 +674,13 @@ CREATE TABLE IF NOT EXISTS `usercourse` (
 --
 
 CREATE TABLE IF NOT EXISTS `userlogin` (
-`userLoginId` int(11) NOT NULL,
+  `userLoginId` int(11) NOT NULL AUTO_INCREMENT,
   `loginDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userId` int(11) NOT NULL,
-  `remoteAddr` varchar(300) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=393 DEFAULT CHARSET=latin1;
+  `remoteAddr` varchar(300) NOT NULL,
+  PRIMARY KEY (`userLoginId`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=395 ;
 
 --
 -- Dumping data for table `userlogin`
@@ -809,7 +1078,9 @@ INSERT INTO `userlogin` (`userLoginId`, `loginDate`, `userId`, `remoteAddr`) VAL
 (389, '2016-12-27 05:19:19', 2, '127.0.0.1'),
 (390, '2016-12-27 05:21:13', 2, '127.0.0.1'),
 (391, '2016-12-27 05:27:31', 2, '127.0.0.1'),
-(392, '2016-12-27 05:28:58', 1, '127.0.0.1');
+(392, '2016-12-27 05:28:58', 1, '127.0.0.1'),
+(393, '2017-01-18 09:22:43', 1, '::1'),
+(394, '2017-01-18 09:23:14', 1, '::1');
 
 -- --------------------------------------------------------
 
@@ -818,12 +1089,14 @@ INSERT INTO `userlogin` (`userLoginId`, `loginDate`, `userId`, `remoteAddr`) VAL
 --
 
 CREATE TABLE IF NOT EXISTS `usermembership` (
-`userMemId` int(11) NOT NULL,
+  `userMemId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `memType` enum('admin','clerk','student') NOT NULL DEFAULT 'student',
   `accessLevel` int(11) NOT NULL,
-  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userMemId`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `usermembership`
@@ -840,14 +1113,16 @@ INSERT INTO `usermembership` (`userMemId`, `userId`, `memType`, `accessLevel`, `
 --
 
 CREATE TABLE IF NOT EXISTS `usersuggestion` (
-`sugId` int(11) NOT NULL,
+  `sugId` int(11) NOT NULL AUTO_INCREMENT,
   `msgType` enum('contactUs','landing') NOT NULL DEFAULT 'contactUs',
   `userId` int(11) NOT NULL,
   `suggestion` varchar(30000) NOT NULL,
   `ourResponse` varchar(30000) NOT NULL,
   `isResponded` enum('Y','N') NOT NULL DEFAULT 'N',
-  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`sugId`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -856,214 +1131,15 @@ CREATE TABLE IF NOT EXISTS `usersuggestion` (
 --
 
 CREATE TABLE IF NOT EXISTS `usertemplate` (
-`templId` int(11) NOT NULL,
+  `templId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   `templName` varchar(300) NOT NULL,
   `templDesc` varchar(30000) NOT NULL,
-  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `createDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`templId`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `attendence`
---
-ALTER TABLE `attendence`
- ADD PRIMARY KEY (`attendenceId`), ADD KEY `userId` (`userId`), ADD KEY `courseId` (`courseId`);
-
---
--- Indexes for table `class`
---
-ALTER TABLE `class`
- ADD PRIMARY KEY (`classId`), ADD KEY `subjectId` (`subjectId`);
-
---
--- Indexes for table `course`
---
-ALTER TABLE `course`
- ADD PRIMARY KEY (`courseId`);
-
---
--- Indexes for table `exam`
---
-ALTER TABLE `exam`
- ADD PRIMARY KEY (`examId`), ADD KEY `userId` (`userId`), ADD KEY `courseId` (`courseId`), ADD KEY `subjectId` (`subjectId`);
-
---
--- Indexes for table `fees`
---
-ALTER TABLE `fees`
- ADD PRIMARY KEY (`feeId`);
-
---
--- Indexes for table `menu`
---
-ALTER TABLE `menu`
- ADD PRIMARY KEY (`menuid`), ADD UNIQUE KEY `menuid` (`menuid`);
-
---
--- Indexes for table `menurights`
---
-ALTER TABLE `menurights`
- ADD PRIMARY KEY (`userid`,`menuid`);
-
---
--- Indexes for table `progress`
---
-ALTER TABLE `progress`
- ADD PRIMARY KEY (`progressId`), ADD KEY `userId` (`userId`), ADD KEY `courseId` (`courseId`);
-
---
--- Indexes for table `reminders`
---
-ALTER TABLE `reminders`
- ADD PRIMARY KEY (`reminderId`), ADD KEY `userId` (`userId`), ADD KEY `courseId` (`courseId`);
-
---
--- Indexes for table `role`
---
-ALTER TABLE `role`
- ADD PRIMARY KEY (`roleid`);
-
---
--- Indexes for table `subject`
---
-ALTER TABLE `subject`
- ADD PRIMARY KEY (`subjectId`), ADD KEY `courseId` (`courseId`);
-
---
--- Indexes for table `subjectmaster`
---
-ALTER TABLE `subjectmaster`
- ADD PRIMARY KEY (`subjectId`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
- ADD PRIMARY KEY (`userId`);
-
---
--- Indexes for table `usercourse`
---
-ALTER TABLE `usercourse`
- ADD PRIMARY KEY (`userCourseId`), ADD KEY `userId` (`userId`), ADD KEY `courseId` (`courseId`);
-
---
--- Indexes for table `userlogin`
---
-ALTER TABLE `userlogin`
- ADD PRIMARY KEY (`userLoginId`), ADD KEY `userId` (`userId`);
-
---
--- Indexes for table `usermembership`
---
-ALTER TABLE `usermembership`
- ADD PRIMARY KEY (`userMemId`), ADD KEY `userId` (`userId`);
-
---
--- Indexes for table `usersuggestion`
---
-ALTER TABLE `usersuggestion`
- ADD PRIMARY KEY (`sugId`), ADD KEY `userId` (`userId`);
-
---
--- Indexes for table `usertemplate`
---
-ALTER TABLE `usertemplate`
- ADD PRIMARY KEY (`templId`), ADD KEY `userId` (`userId`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `attendence`
---
-ALTER TABLE `attendence`
-MODIFY `attendenceId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `class`
---
-ALTER TABLE `class`
-MODIFY `classId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `course`
---
-ALTER TABLE `course`
-MODIFY `courseId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
---
--- AUTO_INCREMENT for table `exam`
---
-ALTER TABLE `exam`
-MODIFY `examId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `fees`
---
-ALTER TABLE `fees`
-MODIFY `feeId` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `menu`
---
-ALTER TABLE `menu`
-MODIFY `menuid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `progress`
---
-ALTER TABLE `progress`
-MODIFY `progressId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `reminders`
---
-ALTER TABLE `reminders`
-MODIFY `reminderId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `role`
---
-ALTER TABLE `role`
-MODIFY `roleid` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `subject`
---
-ALTER TABLE `subject`
-MODIFY `subjectId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `subjectmaster`
---
-ALTER TABLE `subjectmaster`
-MODIFY `subjectId` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `usercourse`
---
-ALTER TABLE `usercourse`
-MODIFY `userCourseId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `userlogin`
---
-ALTER TABLE `userlogin`
-MODIFY `userLoginId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=393;
---
--- AUTO_INCREMENT for table `usermembership`
---
-ALTER TABLE `usermembership`
-MODIFY `userMemId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `usersuggestion`
---
-ALTER TABLE `usersuggestion`
-MODIFY `sugId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `usertemplate`
---
-ALTER TABLE `usertemplate`
-MODIFY `templId` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -1072,73 +1148,73 @@ MODIFY `templId` int(11) NOT NULL AUTO_INCREMENT;
 -- Constraints for table `attendence`
 --
 ALTER TABLE `attendence`
-ADD CONSTRAINT `attendence_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `idx_courseId` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `attendence_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `idx_courseId` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `class`
 --
 ALTER TABLE `class`
-ADD CONSTRAINT `idx_subId` FOREIGN KEY (`subjectId`) REFERENCES `subject` (`subjectId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `idx_subId` FOREIGN KEY (`subjectId`) REFERENCES `subject` (`subjectId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `exam`
 --
 ALTER TABLE `exam`
-ADD CONSTRAINT `exam_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `exam_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `exam_ibfk_3` FOREIGN KEY (`subjectId`) REFERENCES `subject` (`subjectId`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `exam_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `exam_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `exam_ibfk_3` FOREIGN KEY (`subjectId`) REFERENCES `subject` (`subjectId`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `progress`
 --
 ALTER TABLE `progress`
-ADD CONSTRAINT `progress_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `progress_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `progress_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `progress_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `reminders`
 --
 ALTER TABLE `reminders`
-ADD CONSTRAINT `reminders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `reminders_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `reminders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reminders_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `subject`
 --
 ALTER TABLE `subject`
-ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `usercourse`
 --
 ALTER TABLE `usercourse`
-ADD CONSTRAINT `usercourse_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `usercourse_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `usercourse_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usercourse_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `userlogin`
 --
 ALTER TABLE `userlogin`
-ADD CONSTRAINT `userlogin_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `userlogin_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `usermembership`
 --
 ALTER TABLE `usermembership`
-ADD CONSTRAINT `usermembership_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usermembership_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `usersuggestion`
 --
 ALTER TABLE `usersuggestion`
-ADD CONSTRAINT `usersuggestion_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `usersuggestion_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `usertemplate`
 --
 ALTER TABLE `usertemplate`
-ADD CONSTRAINT `idx_userId` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `idx_userId` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

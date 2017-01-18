@@ -44,7 +44,7 @@ function isValidIdPassword($loginId, $password, $DB) {
     }
 
 
-    $sql = "SELECT * FROM user WHERE loginId= :uname AND password = :upass ";
+    $sql = "SELECT * FROM wtfindin_arm.user WHERE loginId= :uname AND password = :upass ";
 
     try {
         $stmt = $DB->prepare($sql);
