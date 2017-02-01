@@ -1,6 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Slab', serif;
+    font-size: 18px;
+}
 .maps{
     height: 300px;
-    border-style: dotted;
+    border: 1px solid gray;
+    box-shadow: 5px 0px 40px rgba(0,0,0, .8);
+
 }
 .navbar {
     margin-bottom: 0;
@@ -8,7 +16,16 @@
 }
 
 .row.content {height: 450px}
-
+.contacthead{
+    padding: 0;
+    margin: 0;
+    color: white;
+    background-color: #2E79B4;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 4px;
+}
 .sidenav {
     padding-top: 20px;
     background-color: #f1f1f1;
@@ -19,21 +36,49 @@
 }
 
 .footer {
-    background-color: #555;
     background: #2C3E50;
+    font-size: 14px;
     color: white;
     text-align: center;
     padding: 15px;
 }
 .parallax {
-    background-image: url("../icon/students1.png");
-    height: 500px;
+    height: 140px;
+    background-image: url("../icon/bulb.jpg");
+    color: yellow;
+    font-size: 3em;
+    font-weight: bold;
+    padding: 30px;
+    text-align: center;
 
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.parallax_index {
+    height: 500px;
+    background-image: url("../icon/index.jpg");
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    padding: 90px;
+    text-align: center;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@media (max-width: 800px) {
+    .parallax_index{padding: 60px; font-size: 30px;}
+}
+@media (max-width: 600px) {
+    .parallax{font-size: 30px;}
+    .parallax_index{padding: 60px; font-size: 20px;}
+}
+
 
 @media screen and (max-width: 767px) {
     .sidenav {
@@ -43,20 +88,25 @@
     .row.content {height:auto;} 
 }
 .aboutus{
-    background-color: black;
-    padding: 15px;
-    color: white;
+    color: #2C3E50;
 }
 .aboutheading{
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bolder;
     text-align: center;
 }
 .contactus{
     text-justify: auto;
-    padding: 15px;
-    background-color: white;
-    color: darkslateblue;
+    background-color: #1e865c;
+    color: #f1f1f1;
+}
+.aboutus, .contactus, .courses{
+    padding: 50px;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+}
+@media screen and (max-width: 767px) {
+    .aboutus, .contactus, .courses{padding: 15px;}
 }
 .image{
     width: 100%;
@@ -65,4 +115,42 @@
     -moz-filter: brightness(50%);
     -o-filter: brightness(50%);
     -ms-filter: brightness(50%);
+}
+.panel {
+    border: 1px solid #2C3E50;
+    transition: box-shadow 0.5s;
+}
+
+.panel:hover {
+    box-shadow: 5px 0px 40px rgba(0,0,0, .8);
+}
+
+.panel-heading{
+    color: white !important;
+    background-color:#2C3E50 !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+}
+.panel-footer {
+    background-color: #2C3E50 !important;
+    color: white !important;
+} 
+.back-to-top {
+    background: none;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    z-index: 100;
+    display: none;
+    text-decoration: none;
+    color: yellow;
+}
+
+
+
+.back-to-top i {
+    font-size: 40px;
 }
